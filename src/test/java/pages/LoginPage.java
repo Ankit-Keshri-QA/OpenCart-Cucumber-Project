@@ -14,10 +14,10 @@ public class LoginPage {
 		PageFactory.initElements(driver, this);
 	}
 
-	@FindBy(xpath = "//h2[contains(text(),'Returning Customer')]")
+	@FindBy(xpath = "//*[@id=\"content\"]/div/div[2]/div/h2")
 	private WebElement returningCustomerText;
 
-	@FindBy(xpath = "//p[contains(text(),'I am a returning customer')]")
+	@FindBy(xpath = "//*[@id=\"content\"]/div/div[2]/div/h2//following-sibling::p//strong")
 	private WebElement returningCustomerSubText;
 
 	@FindBy(name = "email")
@@ -26,10 +26,10 @@ public class LoginPage {
 	@FindBy(name = "password")
 	private WebElement passwordField;
 
-	@FindBy(linkText = "Forgotten Password")
+	@FindBy(css = "div[class='form-group'] [href*='forgotten']")
 	private WebElement forgottenPasswordLink;
 
-	@FindBy(xpath = "//input[@type='submit' and @value='Login']")
+	@FindBy(xpath = "//input[@type='submit']")
 	private WebElement loginButton;
 
 	public String getReturningCustomerText() {
@@ -54,6 +54,13 @@ public class LoginPage {
 
 	public void clickLogin() {
 		loginButton.click();
+	}
+
+	public void doLogin(String email, String pass) {
+		enterEmail(email);
+		enterPassword(pass);
+		clickLogin();
+
 	}
 
 }
